@@ -90,4 +90,20 @@ public class WeavyService {
             return response.body().string();
         }
     }
+
+    public String delete(String uid) throws IOException {
+        OkHttpClient client = getUnsafeOkHttpClient();
+        Request request = new Request.Builder()
+                .url(apiUrl + "/users/" + uid)
+                .delete()
+                .addHeader("Authorization", "Bearer " + apiKey)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            }
+            return response.body().string();
+        }
+    }
 }

@@ -28,4 +28,10 @@ public class WeavyController {
         String result = weavyService.getUser(id);
         return ResponseEntity.ok(result);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") String id) throws IOException {
+        String result = weavyService.delete(id);
+        return ResponseEntity.ok(result);
+    }
 }
