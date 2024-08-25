@@ -34,4 +34,10 @@ public class WeavyController {
         String result = weavyService.delete(id);
         return ResponseEntity.ok(result);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> update(@PathVariable String uid, @RequestBody UserDTO userDTO) throws IOException {
+        String result = weavyService.update(uid, userDTO);
+        return ResponseEntity.ok(result);
+    }
 }

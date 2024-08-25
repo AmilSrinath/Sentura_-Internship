@@ -106,4 +106,22 @@ public class WeavyService {
             return response.body().string();
         }
     }
+
+    public String update(String uid, UserDTO userDTO) throws IOException {
+        OkHttpClient client = getUnsafeOkHttpClient();
+        String userJson = objectMapper.writeValueAsString(userDTO);
+        RequestBody body = RequestBody.create(userJson, MediaType.parse("application/json"));
+        Request request = new Request.Builder()
+                .url(apiUrl + "/users/" + uid)
+                .put(body)
+                .addHeader("Authorization", "Bearer " + apiKey)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            }
+            return response.body().string();
+        }
+    }
 }
