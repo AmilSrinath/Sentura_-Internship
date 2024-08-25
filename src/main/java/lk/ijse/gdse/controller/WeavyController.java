@@ -4,10 +4,7 @@ import lk.ijse.gdse.dto.UserDTO;
 import lk.ijse.gdse.service.WeavyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -23,6 +20,12 @@ public class WeavyController {
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody UserDTO userDTO) throws IOException {
         String result = weavyService.save(userDTO);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/getUser/{id}")
+    public ResponseEntity<String> getUser(@PathVariable("id") String id) throws IOException {
+        String result = weavyService.getUser(id);
         return ResponseEntity.ok(result);
     }
 }
