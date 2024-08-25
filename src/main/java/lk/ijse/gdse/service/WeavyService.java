@@ -124,4 +124,20 @@ public class WeavyService {
             return response.body().string();
         }
     }
+
+    public String getUsers() throws IOException {
+        OkHttpClient client = getUnsafeOkHttpClient();
+        Request request = new Request.Builder()
+                .url(apiUrl + "/users")
+                .get()
+                .addHeader("Authorization", "Bearer " + apiKey)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            }
+            return response.body().string();
+        }
+    }
 }

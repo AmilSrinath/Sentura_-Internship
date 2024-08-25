@@ -40,4 +40,10 @@ public class WeavyController {
         String result = weavyService.update(uid, userDTO);
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<String> getUsers() throws IOException {
+        String result = weavyService.getUsers();
+        return ResponseEntity.ok(result);
+    }
 }
